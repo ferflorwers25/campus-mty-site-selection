@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from config import CAMPUSES, CATCHMENT_M, CATEGORIES, METRO_MUNICIPALITIES, RINGS_M
+from config import CAMPUSES, CATCHMENT_M, CATEGORIES, EXCLUDE, METRO_MUNICIPALITIES, RINGS_M
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw" / "denue_nl.csv"
@@ -59,6 +59,7 @@ def categorize(nombre_act: pd.Series) -> pd.Series:
     # First match wins, so order in CATEGORIES matters.
     for cat, pattern in reversed(list(CATEGORIES.items())):
         out[norm.str.contains(pattern, regex=True, na=False)] = cat
+    out[norm.str.contains(EXCLUDE, regex=True, na=False)] = "otro"
     return out
 
 

@@ -36,8 +36,12 @@ CATEGORIES = {
     "minisuper_conveniencia": r"minisuper|tiendas de conveniencia",
     "abarrotes": r"abarrotes",
     "papeleria": r"papeleria",
-    "fotocopiado_impresion": r"fotocopiado|impresion",
+    "fotocopiado_impresion": r"fotocopiado|impresion de formas continuas|revelado e impresion",
     "gimnasio": r"acondicionamiento fisico",
     "lavanderia": r"lavanderia",
     "belleza_barberia": r"salones y clinicas de belleza|peluqueria|barberia",
 }
+
+# Activities excluded from every category (wholesale, manufacturing, publishing, public sector):
+# they are not walk-in competitors for a small student-oriented business.
+EXCLUDE = r"al por mayor|fabricacion|edicion de|industrias conexas|sector publico"

@@ -1,0 +1,9 @@
+# Raw and processed data are reproducible from src/ — do not commit them
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.env

@@ -32,6 +32,18 @@ Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 - **Location quotient (LQ):** a category's share of businesses near the campus divided by its share across the metro. LQ < 1 means under-represented.
 - **Benchmark:** the same metrics for UANL and UDEM, to separate "normal near universities" from "specific to the Tec."
 
+## Preliminary results (phase 1: supply only)
+
+![Location quotient near the Tec](docs/lq_tec.png)
+
+- DENUE lists **173,829 businesses** in the Monterrey metro, **926** of them within 1 km of Campus Monterrey.
+- **Saturated:** laundromats (31 within 1 km, 7.1× the metro share), restaurants and cafés (~2×).
+- **Scarce:** stationery (0.37×, 6 shops) and copy/print shops (0.58×, 4 shops). Around UANL, the same categories are *over*-represented (1.74× and 5.46×), so the gap is specific to the Tec area, not to universities in general.
+- A 250 m grid flags candidate cells **south of the campus**: top-quartile commercial activity with no stationery or copy shop within 400 m.
+- 🗺️ Interactive map: [`docs/map_tec.html`](docs/map_tec.html) (download it and open it in a browser).
+
+These are **not recommendations yet**. Counts are small, on-campus services may not appear in DENUE, and demand has not been measured. Phase 2 adds it.
+
 ## Tech stack
 
 Python (Pandas, NumPy) · PostgreSQL · SQL · Jupyter · Folium (maps) · Tableau Public (dashboard)
@@ -63,7 +75,7 @@ python build_study_area.py    # cleans data, computes distances and location quo
 ## Roadmap
 
 - [x] Project structure, download and cleaning pipeline
-- [ ] Phase 1: supply, competition by category and distance ring
+- [x] Phase 1: supply, competition by category and distance ring ([notebook](notebooks/01_exploration.ipynb))
 - [ ] Phase 2: demand, population by AGEB (Censo 2020)
 - [ ] Phase 3: opportunity score per block and interactive map
 - [ ] Tableau Public dashboard

@@ -1,7 +1,9 @@
 # What business should open near Tec de Monterrey? A site-selection analysis with INEGI data
 
 > **Portfolio case study.** The client below is a simulated scenario. All data is public and comes from INEGI (Mexico's national statistics institute).
-> 🚧 **Status: in progress.** Supply and demand analysis done; dashboard and business memo next.
+> 📄 **Business memo:** [English](docs/business_memo.md) · [Español](docs/memo_negocio.md)
+> 🗺️ **Interactive maps:** [opportunity](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_opportunity.html) · [competition](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_tec.html)
+> 🚧 **Status:** analysis and memo done; Tableau Public dashboard in progress.
 
 ## Business problem
 
@@ -45,7 +47,7 @@ Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 - The **three best locations sit 700–800 m south / south-west of the campus**. Each has 1,170–1,300 residents aged 18–24 within a 6-minute walk and **no stationery or copy shop** in that radius.
 - **Robust:** 4 of the top 5 cells stay the same when scoring on total population instead of 18–24 year-olds.
 - **Draft recommendation:** a combined stationery + print/copy shop in the top-ranked area south of the campus, pending field validation.
-- 🗺️ Interactive map: [`docs/map_opportunity.html`](docs/map_opportunity.html) · [notebook](notebooks/02_demand_and_opportunity.ipynb)
+- 🗺️ [Interactive map](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_opportunity.html) · [notebook](notebooks/02_demand_and_opportunity.ipynb)
 
 ### Phase 1: supply
 
@@ -55,7 +57,7 @@ Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 - **Saturated:** laundromats (31 within 1 km, 7.1× the metro share), restaurants and cafés (~2×).
 - **Scarce:** stationery (0.37×, 6 shops) and copy/print shops (0.58×, 4 shops). Around UANL, the same categories are *over*-represented (1.74× and 5.46×), so the gap is specific to the Tec area, not to universities in general.
 - A 250 m grid flags candidate cells **south of the campus**: top-quartile commercial activity with no stationery or copy shop within 400 m.
-- 🗺️ Interactive map: [`docs/map_tec.html`](docs/map_tec.html) (download it and open it in a browser).
+- 🗺️ [Interactive map](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_tec.html)
 
 Phase 1 alone was not enough to recommend anything (small counts, no demand data). Phase 2 above adds demand.
 
@@ -97,8 +99,8 @@ python build_demand.py        # demand by grid cell + opportunity score
 - [x] Phase 1: supply, competition by category and distance ring ([notebook](notebooks/01_exploration.ipynb))
 - [x] Phase 2: demand, population by AGEB (Censo 2020)
 - [x] Phase 3: opportunity score per grid cell and interactive map ([notebook](notebooks/02_demand_and_opportunity.ipynb))
-- [ ] Tableau Public dashboard
-- [ ] One-page business memo with the recommendation
+- [ ] Tableau Public dashboard (data ready in [`dashboard/`](dashboard/))
+- [x] One-page business memo ([EN](docs/business_memo.md) · [ES](docs/memo_negocio.md))
 
 ## Limitations
 

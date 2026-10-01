@@ -1,7 +1,7 @@
 # What business should open near Tec de Monterrey? A site-selection analysis with INEGI data
 
 > **Portfolio case study.** The client below is a simulated scenario. All data is public and comes from INEGI (Mexico's national statistics institute).
-> 🚧 **Status: in progress.** Results will be added as each phase ends.
+> 🚧 **Status: in progress.** Supply and demand analysis done; dashboard and business memo next.
 
 ## Business problem
 
@@ -21,7 +21,8 @@ An entrepreneur wants to open a small business within walking distance of **Tec 
 | Source | What it contains | Use |
 |---|---|---|
 | [DENUE – INEGI](https://www.inegi.org.mx/app/mapa/denue/default.aspx) | Every registered business in Mexico: activity (SCIAN), size, coordinates | Supply / competition |
-| Censo de Población 2020 – INEGI (by AGEB) *(phase 2)* | Population by urban block group | Demand |
+| Censo de Población y Vivienda 2020 – INEGI (by AGEB) | Population and age groups by urban block group | Demand |
+| Marco Geoestadístico 2020 – INEGI | AGEB boundaries | Places census data on the map |
 
 Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 
@@ -31,8 +32,22 @@ Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 - **Distance:** haversine distance from every business to each campus.
 - **Location quotient (LQ):** a category's share of businesses near the campus divided by its share across the metro. LQ < 1 means under-represented.
 - **Benchmark:** the same metrics for UANL and UDEM, to separate "normal near universities" from "specific to the Tec."
+- **Demand (phase 2):** 250 m grid around the campus. For each cell, residents aged 18–24 within a 500 m walk are estimated by areal interpolation of 2020 Census AGEBs.
+- **Opportunity score:** residents aged 18–24 within 500 m ÷ (stationery + copy shops within 500 m + 1). It is checked against an alternative score that uses total population.
 
-## Preliminary results (phase 1: supply only)
+## Results
+
+### Phase 2: where demand meets the gap
+
+![Top 10 locations by opportunity score](docs/opportunity_top10.png)
+
+- Across the 1.5 km study area, the share of residents aged 18–24 (12.5%) matches Nuevo León (12.1%). The difference is concentration: around the three best cells it reaches **23–25%**, about twice the state level.
+- The **three best locations sit 700–800 m south / south-west of the campus**. Each has 1,170–1,300 residents aged 18–24 within a 6-minute walk and **no stationery or copy shop** in that radius.
+- **Robust:** 4 of the top 5 cells stay the same when scoring on total population instead of 18–24 year-olds.
+- **Draft recommendation:** a combined stationery + print/copy shop in the top-ranked area south of the campus, pending field validation.
+- 🗺️ Interactive map: [`docs/map_opportunity.html`](docs/map_opportunity.html) · [notebook](notebooks/02_demand_and_opportunity.ipynb)
+
+### Phase 1: supply
 
 ![Location quotient near the Tec](docs/lq_tec.png)
 
@@ -42,11 +57,11 @@ Raw data is not committed. It can be rebuilt with the scripts in `src/`.
 - A 250 m grid flags candidate cells **south of the campus**: top-quartile commercial activity with no stationery or copy shop within 400 m.
 - 🗺️ Interactive map: [`docs/map_tec.html`](docs/map_tec.html) (download it and open it in a browser).
 
-These are **not recommendations yet**. Counts are small, on-campus services may not appear in DENUE, and demand has not been measured. Phase 2 adds it.
+Phase 1 alone was not enough to recommend anything (small counts, no demand data). Phase 2 above adds demand.
 
 ## Tech stack
 
-Python (Pandas, NumPy) · PostgreSQL · SQL · Jupyter · Folium (maps) · Tableau Public (dashboard)
+Python (Pandas, NumPy, GeoPandas) · PostgreSQL · SQL · Jupyter · Folium (maps) · Tableau Public (dashboard)
 
 ## How to run
 
@@ -56,6 +71,8 @@ pip install -r requirements.txt
 cd src
 python download_denue.py      # downloads DENUE for Nuevo León
 python build_study_area.py    # cleans data, computes distances and location quotients
+python download_census.py     # downloads Census 2020 by AGEB + AGEB boundaries
+python build_demand.py        # demand by grid cell + opportunity score
 ```
 
 ## Project structure
@@ -64,7 +81,9 @@ python build_study_area.py    # cleans data, computes distances and location quo
 ├── src/
 │   ├── config.py              # campuses, radii, municipalities, categories
 │   ├── download_denue.py      # data download
-│   └── build_study_area.py    # cleaning + distances + location quotients
+│   ├── build_study_area.py    # cleaning + distances + location quotients
+│   ├── download_census.py     # Census 2020 + Marco Geoestadístico download
+│   └── build_demand.py        # areal interpolation + opportunity score
 ├── sql/schema.sql             # PostgreSQL schema + example queries
 ├── notebooks/                 # exploration and analysis
 ├── dashboard/                 # Tableau Public link and screenshots
@@ -76,8 +95,8 @@ python build_study_area.py    # cleans data, computes distances and location quo
 
 - [x] Project structure, download and cleaning pipeline
 - [x] Phase 1: supply, competition by category and distance ring ([notebook](notebooks/01_exploration.ipynb))
-- [ ] Phase 2: demand, population by AGEB (Censo 2020)
-- [ ] Phase 3: opportunity score per block and interactive map
+- [x] Phase 2: demand, population by AGEB (Censo 2020)
+- [x] Phase 3: opportunity score per grid cell and interactive map ([notebook](notebooks/02_demand_and_opportunity.ipynb))
 - [ ] Tableau Public dashboard
 - [ ] One-page business memo with the recommendation
 
@@ -86,6 +105,9 @@ python build_study_area.py    # cleans data, computes distances and location quo
 - DENUE lists registered establishments; informal businesses are under-counted.
 - Campus coordinates are approximate centroids.
 - Location quotients show relative supply, not profitability.
+- The Census counts residents. Students who commute through the area are not captured.
+- INEGI masks small AGEB counts (`*`). They are treated as unknown, which slightly under-estimates demand.
+- Areal interpolation assumes people are evenly spread inside each AGEB.
 
 ## Author
 

@@ -1,9 +1,10 @@
 # What business should open near Tec de Monterrey? A site-selection analysis with INEGI data
 
 > **Portfolio case study.** The client below is a simulated scenario. All data is public and comes from INEGI (Mexico's national statistics institute).
+> 📊 **Interactive dashboard:** [Tableau Public](https://public.tableau.com/views/CampusMTYSiteSelection_/Dashboard1)
 > 📄 **Business memo:** [English](docs/business_memo.md) · [Español](docs/memo_negocio.md)
 > 🗺️ **Interactive maps:** [opportunity](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_opportunity.html) · [competition](https://ferflorwers25.github.io/campus-mty-site-selection/docs/map_tec.html)
-> 🚧 **Status:** analysis and memo done; Tableau Public dashboard in progress.
+> ✅ **Status:** complete (analysis, memo, maps and dashboard).
 
 ## Business problem
 
@@ -99,7 +100,7 @@ python build_demand.py        # demand by grid cell + opportunity score
 - [x] Phase 1: supply, competition by category and distance ring ([notebook](notebooks/01_exploration.ipynb))
 - [x] Phase 2: demand, population by AGEB (Censo 2020)
 - [x] Phase 3: opportunity score per grid cell and interactive map ([notebook](notebooks/02_demand_and_opportunity.ipynb))
-- [ ] Tableau Public dashboard (data ready in [`dashboard/`](dashboard/))
+- [x] [Tableau Public dashboard](https://public.tableau.com/views/CampusMTYSiteSelection_/Dashboard1) (data in [`dashboard/`](dashboard/))
 - [x] One-page business memo ([EN](docs/business_memo.md) · [ES](docs/memo_negocio.md))
 
 ## Limitations

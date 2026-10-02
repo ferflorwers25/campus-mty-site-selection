@@ -1,6 +1,6 @@
 # Tableau Public dashboard
 
-Link: *coming soon*
+Link: [https://public.tableau.com/views/CampusMTYSiteSelection_/Dashboard1](https://public.tableau.com/views/CampusMTYSiteSelection_/Dashboard1)
 
 ## Data files (`tableau_data/`)
 

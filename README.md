@@ -64,7 +64,7 @@ Phase 1 alone was not enough to recommend anything (small counts, no demand data
 
 ## Tech stack
 
-Python (Pandas, NumPy, GeoPandas) · PostgreSQL · SQL · Jupyter · Folium (maps) · Tableau Public (dashboard)
+Python (Pandas, NumPy, GeoPandas) · Jupyter · Folium (maps) · Tableau Public (dashboard)
 
 ## How to run
 
@@ -87,7 +87,7 @@ python build_demand.py        # demand by grid cell + opportunity score
 │   ├── build_study_area.py    # cleaning + distances + location quotients
 │   ├── download_census.py     # Census 2020 + Marco Geoestadístico download
 │   └── build_demand.py        # areal interpolation + opportunity score
-├── sql/schema.sql             # PostgreSQL schema + example queries
+├── sql/schema.sql             # draft PostgreSQL schema (not used yet)
 ├── notebooks/                 # exploration and analysis
 ├── dashboard/                 # Tableau Public link and screenshots
 ├── docs/                      # business memo
